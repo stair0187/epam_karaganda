@@ -1,8 +1,19 @@
-package kz.lab.epam;
+package kz.lab.epam.entity;
 
-public class Catalogue {
+public class CartItem {
+
+    private Long ID_cart;
     private Long ID_autopart;
     private Integer count;
+
+    public Long getID_cart() {
+        return ID_cart;
+    }
+
+    public void setID_cart(Long ID_cart) {
+        this.ID_cart = ID_cart;
+    }
+
 
     public Long getID_autopart() {
         return ID_autopart;
@@ -20,4 +31,3 @@ public class Catalogue {
         this.count = count;
     }
 }
-

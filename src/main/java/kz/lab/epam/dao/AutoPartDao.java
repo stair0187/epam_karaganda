@@ -1,4 +1,4 @@
-package kz.lab.epam;
+package kz.lab.epam.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

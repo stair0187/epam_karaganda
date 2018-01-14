@@ -1,4 +1,4 @@
-package kz.lab.epam;
+package kz.lab.epam.entity;
 
 public class User {
 
