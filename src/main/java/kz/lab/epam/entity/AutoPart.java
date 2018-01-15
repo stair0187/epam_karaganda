@@ -2,18 +2,18 @@ package kz.lab.epam.entity;
 
 public class AutoPart {
 
-    private int ID;
+    private int id;
     private String article;
     private String name;
     private AutoPartType autoPartType;
     private Double price;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getArticle() {
