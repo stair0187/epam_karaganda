@@ -1,22 +1,33 @@
 package kz.lab.epam.entity;
 
+import java.util.List;
+
 public class ShoppingCart {
-    private Long ID;
-    private Long ID_user;
+    private Long id;
+    private Long userId;
+    private List<CartItem> items;
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getID_user() {
-        return ID_user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setID_User(Long ID_user) {
-        this.ID_user = ID_user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public List<CartItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<CartItem> items) {
+        this.items = items;
     }
 }

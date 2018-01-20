@@ -1,11 +1,14 @@
 package kz.lab.epam.entity;
 
+import java.util.List;
+
 public class Order {
 
     private Long ID;
     private Long ID_user;
     private Double total;
     private OrderStatus orderStatus;
+    private List<OrderItem>items;
 
 
     public Long getID() {

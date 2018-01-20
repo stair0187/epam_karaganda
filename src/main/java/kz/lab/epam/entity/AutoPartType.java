@@ -3,5 +3,5 @@ package kz.lab.epam.entity;
 public enum AutoPartType {
 
 
-    ENGINE, SALONE, SUSPENSION, CHASSIS, BODYCOMPONENTS;
+    ENGINE, SALON, SUSPENSION, CHASSIS, BODY_COMPONENTS;
 }
