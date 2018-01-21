@@ -14,7 +14,7 @@ public class ConnectionFactory {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/AutoPartShop", "postgres", "root");
+                    "jdbc:postgresql://localhost:5432/AUTO_PART", "postgres", "root");
 
         } catch (SQLException ex) {
             System.out.println("не удалось установить подключение к базе");

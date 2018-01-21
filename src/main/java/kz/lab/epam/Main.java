@@ -1,45 +1,21 @@
 package kz.lab.epam;
 
+import kz.lab.epam.dao.UserDao;
+import kz.lab.epam.entity.Role;
+import kz.lab.epam.entity.User;
+
 import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
-
-        try {
-            Class.forName("org.postgresql.Driver"); // загружает класс драйвера
-
-        } catch (ClassNotFoundException ex) {
-            System.out.println("не удалось загрузить класс");
-
-        }
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/Ingridience", "postgres", "root");
-
-        } catch (SQLException ex) {
-            System.out.println("не удалось установить подключение к базе");
-        }
-        if (connection != null) {
+        User user = new User();
+        user.setLogin("Pusya");
+        user.setPassword("123");
+        user.setName("Petya");
+        user.setRole (Role.MANAGER);
+        UserDao dao = new UserDao();
+        dao.insert(user);
 
 
-            try {
 
-                Statement statement = connection.createStatement();
-
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM \"ingredients\"");
-                while (resultSet.next()) {
-
-                    System.out.println(resultSet.getLong(1) + " - " + resultSet.getString(2));
-
-                }
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-
-    }
-}
+}}

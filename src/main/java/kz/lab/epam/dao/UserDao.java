@@ -1,29 +1,30 @@
 package kz.lab.epam.dao;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-import kz.lab.epam.entity.AutoPart;
-import kz.lab.epam.entity.AutoPartType;
+import kz.lab.epam.entity.CartItem;
+import kz.lab.epam.entity.Role;
+import kz.lab.epam.entity.User;
 
-import javax.xml.crypto.URIReferenceException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoPartDao {
-
-
-    public Boolean insert(AutoPart part) throws SQLException {
+public class UserDao {
+    public Boolean insert(User user) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertSQL = "INSERT INTO AUTO_PART (ARTICULE,NAME,TYPE,PRICE) VALUES (?,?,?,?)";
+        String insertSQL = "INSERT INTO \"USER\" (NAME,LOGIN,PASSWORD,ROLE) VALUES (?,?,?,?)";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(insertSQL);
-            preparedStatement.setString(1, part.getArticule());
-            preparedStatement.setString(2, part.getName());
-            preparedStatement.setString(3, part.getAutoPartType().name());
-            preparedStatement.setDouble(4, part.getPrice());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getRole().name());
+
             preparedStatement.executeUpdate();
             return true;
 
@@ -56,19 +57,17 @@ public class AutoPartDao {
     }
 
 
-    public Boolean update(AutoPart part) {
+    public Boolean update(User user) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String updateSQL = "UPDATE AUTO_PART SET ARTICULE=?,NAME=?,TYPE=?,PRICE=? WHERE ID=?";
+        String updateSQL = "UPDATE \"USER\" SET NAME=?,PASSWORD=? WHERE ID=?";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(updateSQL);
-            preparedStatement.setString(1, part.getArticule());
-            preparedStatement.setString(2, part.getName());
-            preparedStatement.setString(3, part.getAutoPartType().name());
-            preparedStatement.setDouble(4, part.getPrice());
-            preparedStatement.setLong(5, part.getId());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setLong(3, user.getId());
             preparedStatement.executeUpdate();
             return true;
 
@@ -102,16 +101,14 @@ public class AutoPartDao {
 
 
 
-    public Boolean delete(AutoPart part) {
+    public Boolean delete(User user) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-
-        String deleteSQL = "DELETE FROM AUTO_PART WHERE ID=?";
+        String deleteSQL = "DELETE FROM \"USER\" WHERE ID=?";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(deleteSQL);
-            preparedStatement.setLong(1, part.getId());
-
+            preparedStatement.setLong(1, user.getId());
             preparedStatement.executeUpdate();
             return true;
 
@@ -143,13 +140,13 @@ public class AutoPartDao {
         return false;
     }
 
-    public List<AutoPart> findAll() {
+    public List<User> findAll() {
 
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String selectSQL = "SELECT * FROM AUTO_PART";
+        String selectSQL = "SELECT * FROM \"USER\"";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(selectSQL);
@@ -157,18 +154,18 @@ public class AutoPartDao {
 
             // execute select SQL stetement
             ResultSet rs = preparedStatement.executeQuery();
-            List<AutoPart> parts = new ArrayList<AutoPart>();
+            List<User> users = new ArrayList<User>();
 
             while (rs.next()) {
-                AutoPart part = new AutoPart();
-                part.setId(rs.getLong("ID"));
-                part.setArticule(rs.getString("ARTICULE"));
-                part.setName(rs.getString("NAME"));
-                part.setAutoPartType(AutoPartType.valueOf(rs.getString("TYPE")));
-                part.setPrice(rs.getDouble("PRICE"));
-                parts.add(part);
+                User user = new User();
+                user.setId(rs.getLong("ID"));
+                user.setName(rs.getString("NAME"));
+                user.setLogin(rs.getString("LOGIN"));
+                user.setPassword(rs.getString("PASSWORD"));
+                user.setRole(Role.valueOf(rs.getString("ROLE")));
+                users.add(user);
             }
-            return parts;
+            return users;
 
         } catch (SQLException e) {
 

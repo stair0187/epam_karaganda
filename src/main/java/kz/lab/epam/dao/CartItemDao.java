@@ -1,29 +1,27 @@
 package kz.lab.epam.dao;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-import kz.lab.epam.entity.AutoPart;
-import kz.lab.epam.entity.AutoPartType;
+import kz.lab.epam.entity.CartItem;
+import kz.lab.epam.entity.Catalogue;
 
-import javax.xml.crypto.URIReferenceException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoPartDao {
-
-
-    public Boolean insert(AutoPart part) throws SQLException {
+public class CartItemDao {
+    public Boolean insert(CartItem item) throws SQLException {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String insertSQL = "INSERT INTO AUTO_PART (ARTICULE,NAME,TYPE,PRICE) VALUES (?,?,?,?)";
+        String insertSQL = "INSERT INTO CART_ITEM (CART_ID,AUTOPART_ID,COUNT) VALUES (?,?,?)";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(insertSQL);
-            preparedStatement.setString(1, part.getArticule());
-            preparedStatement.setString(2, part.getName());
-            preparedStatement.setString(3, part.getAutoPartType().name());
-            preparedStatement.setDouble(4, part.getPrice());
+            preparedStatement.setLong(1, item.getCart_id());
+            preparedStatement.setLong(2, item.getAutopart_id());
+            preparedStatement.setLong(3, item.getCount());
             preparedStatement.executeUpdate();
             return true;
 
@@ -56,19 +54,17 @@ public class AutoPartDao {
     }
 
 
-    public Boolean update(AutoPart part) {
+    public Boolean update(CartItem item) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String updateSQL = "UPDATE AUTO_PART SET ARTICULE=?,NAME=?,TYPE=?,PRICE=? WHERE ID=?";
+        String updateSQL = "UPDATE CART_ITEM SET COUNT=? WHERE CART_ID=? AND AUTOPART_ID=?";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(updateSQL);
-            preparedStatement.setString(1, part.getArticule());
-            preparedStatement.setString(2, part.getName());
-            preparedStatement.setString(3, part.getAutoPartType().name());
-            preparedStatement.setDouble(4, part.getPrice());
-            preparedStatement.setLong(5, part.getId());
+            preparedStatement.setLong(1, item.getCount());
+            preparedStatement.setLong(2, item.getCart_id());
+            preparedStatement.setLong(3, item.getAutopart_id());
             preparedStatement.executeUpdate();
             return true;
 
@@ -102,15 +98,15 @@ public class AutoPartDao {
 
 
 
-    public Boolean delete(AutoPart part) {
+    public Boolean delete(CartItem item) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-
-        String deleteSQL = "DELETE FROM AUTO_PART WHERE ID=?";
+        String deleteSQL = "DELETE FROM CART_ITEM WHERE CART_ID=? AND AUTOPART_ID=?";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(deleteSQL);
-            preparedStatement.setLong(1, part.getId());
+            preparedStatement.setLong(1, item.getCart_id());
+            preparedStatement.setLong(2, item.getAutopart_id());
 
             preparedStatement.executeUpdate();
             return true;
@@ -143,13 +139,13 @@ public class AutoPartDao {
         return false;
     }
 
-    public List<AutoPart> findAll() {
+    public List<CartItem> findAll() {
 
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
-        String selectSQL = "SELECT * FROM AUTO_PART";
+        String selectSQL = "SELECT * FROM CART_ITEM";
         try {
             dbConnection = ConnectionFactory.createConnection();
             preparedStatement = dbConnection.prepareStatement(selectSQL);
@@ -157,18 +153,16 @@ public class AutoPartDao {
 
             // execute select SQL stetement
             ResultSet rs = preparedStatement.executeQuery();
-            List<AutoPart> parts = new ArrayList<AutoPart>();
+            List<CartItem> items = new ArrayList<CartItem>();
 
             while (rs.next()) {
-                AutoPart part = new AutoPart();
-                part.setId(rs.getLong("ID"));
-                part.setArticule(rs.getString("ARTICULE"));
-                part.setName(rs.getString("NAME"));
-                part.setAutoPartType(AutoPartType.valueOf(rs.getString("TYPE")));
-                part.setPrice(rs.getDouble("PRICE"));
-                parts.add(part);
+                CartItem item = new CartItem();
+                item.setCart_id(rs.getLong("CART_ID"));
+                item.setAutopart_id(rs.getLong("AUTOPART_ID"));
+                item.setCount(rs.getInt("COUNT"));
+                items.add(item);
             }
-            return parts;
+            return items;
 
         } catch (SQLException e) {
 

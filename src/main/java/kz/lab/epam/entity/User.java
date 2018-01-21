@@ -2,19 +2,18 @@ package kz.lab.epam.entity;
 
 public class User {
 
-    private Long ID;
+    private Long id;
     private String name;
     private String login;
     private String password;
     private Role role;
 
-
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

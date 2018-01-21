@@ -32,19 +32,19 @@ public class AutoPart {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public AutoPartType getAutoPartType() {
         return autoPartType;
     }
 
     public void setAutoPartType(AutoPartType autoPartType) {
         this.autoPartType = autoPartType;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

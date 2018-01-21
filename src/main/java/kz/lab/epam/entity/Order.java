@@ -5,11 +5,10 @@ import java.util.List;
 public class Order {
 
     private Long ID;
-    private Long ID_user;
+    private Long user_id;
     private Double total;
     private OrderStatus orderStatus;
-    private List<OrderItem>items;
-
+    private List<OrderItem> items;
 
     public Long getID() {
         return ID;
@@ -19,12 +18,12 @@ public class Order {
         this.ID = ID;
     }
 
-    public Long getID_user() {
-        return ID_user;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setID_user(Long ID_user) {
-        this.ID_user = ID_user;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public Double getTotal() {
@@ -42,4 +41,14 @@ public class Order {
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
 }
+
+

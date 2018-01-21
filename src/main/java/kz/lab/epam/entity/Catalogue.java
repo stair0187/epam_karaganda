@@ -1,15 +1,15 @@
 package kz.lab.epam.entity;
 
 public class Catalogue {
-    private Long ID_autopart;
+    private Long autopart_id;
     private Integer count;
 
-    public Long getID_autopart() {
-        return ID_autopart;
+    public Long getAutopart_id() {
+        return autopart_id;
     }
 
-    public void setID_autopart(Long ID_autopart) {
-        this.ID_autopart = ID_autopart;
+    public void setAutopart_id(Long autopart_id) {
+        this.autopart_id = autopart_id;
     }
 
     public Integer getCount() {

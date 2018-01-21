@@ -2,25 +2,25 @@ package kz.lab.epam.entity;
 
 public class CartItem {
 
-    private Long ID_cart;
-    private Long ID_autopart;
+    private Long cart_id;
+    private Long autopart_id;
     private Integer count;
 
-    public Long getID_cart() {
-        return ID_cart;
+    public Long getCart_id() {
+        return cart_id;
     }
 
-    public void setID_cart(Long ID_cart) {
-        this.ID_cart = ID_cart;
+    public void setCart_id(Long cart_id) {
+        this.cart_id = cart_id;
     }
 
 
-    public Long getID_autopart() {
-        return ID_autopart;
+    public Long getAutopart_id() {
+        return autopart_id;
     }
 
-    public void setID_autopart(Long ID_autopart) {
-        this.ID_autopart = ID_autopart;
+    public void setAutopart_id(Long autopart_id) {
+        this.autopart_id = autopart_id;
     }
 
     public Integer getCount() {
