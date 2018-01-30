@@ -1,11 +1,12 @@
 package kz.lab.epam.dao;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import kz.lab.epam.entity.AutoPart;
 import kz.lab.epam.entity.AutoPartType;
 
-import javax.xml.crypto.URIReferenceException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

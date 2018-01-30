@@ -8,14 +8,16 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) {
-        User user = new User();
-        user.setLogin("Pusya");
-        user.setPassword("123");
-        user.setName("Petya");
-        user.setRole (Role.MANAGER);
-        UserDao dao = new UserDao();
-        dao.insert(user);
+//        User user = new User();
+//        user.setLogin("Pusya");
+//        user.setPassword("123");
+//        user.setName("Petya");
+//        user.setRole (Role.MANAGER);
+//        UserDao dao = new UserDao();
+//        dao.insert(user);
 
+        String text = "This is a string.";
+        System.out.println("'" + text.substring(0, 7) + "'");
 
 
 }}
